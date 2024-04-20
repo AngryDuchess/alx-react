@@ -10,7 +10,6 @@ import { getLatestNotification } from "../utils/utils";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import WithLogging from "../HOC/WithLogging";
-import { StyleSheet, css } from "aphrodite";
 
 class App extends React.Component {
   constructor(props) {
