@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     height: "3px",
     backgroundColor: "#e0354b",
   },
+  'App-footer': {
+    textAlign: 'center',
+  },
 });
 
 class App extends React.Component {
@@ -83,7 +86,7 @@ class App extends React.Component {
             </p>
           </BodySection>
           <hr className={css(styles.hr)} />
-          <Footer />
+          <Footer className={css(styles['App-footer'])} />
         </div>
       </>
     );

@@ -1,3 +1,4 @@
+import React from 'react';
 import Footer from './Footer';
 import { shallow} from 'enzyme';
 import { getFullYear,getFooterCopy } from '../utils/utils';
