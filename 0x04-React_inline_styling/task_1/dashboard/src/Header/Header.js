@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 },
 })
 
-export default function App() {
+export default function Header() {
   return (
     <div className={css(styles['App-header'])}>
 			<img className={css(styles['header-img'])} src={logo} alt='Holberton' />

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     padding: "2em",
   },
 });
-export default function App() {
+export default function Login() {
   return (
     <>
       <div className={css(styles["App-body"])}>
