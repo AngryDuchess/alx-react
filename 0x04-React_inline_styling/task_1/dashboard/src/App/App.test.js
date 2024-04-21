@@ -3,6 +3,15 @@ import App from "./App";
 import Login from "../Login/Login";
 import CourseList from "../CourseList/CourseList";
 import { jest } from "@jest/globals";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+
+beforeEach(() => {
+	StyleSheetTestUtils.suppressStyleInjection();
+});
+afterEach(() => {
+	StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe("<App />", () => {
   it("renders the react app", () => {
