@@ -10,6 +10,16 @@ const styles = StyleSheet.create({
   default: {
     color: "blue",
   },
+  li: {
+    width: "100%",
+    borderBottom: "1px solid black",
+    padding: "10px 8px",
+
+    "@media (min-width: 600px)": {
+      borderBottom: "0px",
+      padding: "10px 8px",
+    },
+  }
 });
 
 export default class NotificationItem extends React.PureComponent {
@@ -20,7 +30,7 @@ export default class NotificationItem extends React.PureComponent {
         {type && value ? (
           <li
             className={
-              type === "default" ? css(styles.default) : css(styles.urgent)
+              css(styles.li, type === "default" ? styles.default : styles.urgent)
             }
             onClick={() => markAsRead(id)}
             data-notification-type={type}
@@ -30,7 +40,7 @@ export default class NotificationItem extends React.PureComponent {
         ) : null}
         {html ? (
           <li
-            className={css(styles.urgent)}
+            className={css(styles.li, styles.urgent)}
             onClick={() => markAsRead(id)}
             data-urgent
             dangerouslySetInnerHTML={{ __html: html }}

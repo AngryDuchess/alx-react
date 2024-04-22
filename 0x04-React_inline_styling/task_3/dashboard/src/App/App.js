@@ -16,17 +16,20 @@ const styles = StyleSheet.create({
     maxWidth: "100vw",
     fontFamily: "Arial, Helvetica, sans-serif",
   },
+
   Top: {
-    display: "flex",
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    "@media (min-width: 600px)": {
+      display: "flex",
+      flexDirection: "row-reverse",
+      justifyContent: "space-between",
+    },
   },
   hr: {
     height: "3px",
     backgroundColor: "#e0354b",
   },
-  'App-footer': {
-    textAlign: 'center',
+  "App-footer": {
+    textAlign: "center",
   },
 });
 
@@ -86,7 +89,7 @@ class App extends React.Component {
             </p>
           </BodySection>
           <hr className={css(styles.hr)} />
-          <Footer className={css(styles['App-footer'])} />
+          <Footer className={css(styles["App-footer"])} />
         </div>
       </>
     );
