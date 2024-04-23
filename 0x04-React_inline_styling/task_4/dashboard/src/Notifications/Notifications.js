@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-// import "./Notifications.css";
 import icon from "../assets/close-icon.png";
 import { getLatestNotification } from "../utils/utils";
 import NotificationItem from "./NotificationItem";
@@ -7,7 +6,29 @@ import PropTypes from "prop-types";
 import NotificationItemShape from "./NotificationItemShape";
 import { StyleSheet, css } from "aphrodite";
 
+
+const bounce = {
+  '0%': { transform: 'translateY(0px)' },
+  '50%': { transform: 'translateY(-5px)' },
+  '100%': { transform: 'translateY(5px)' },
+};
+
+const fadeIn = {
+  '0%': { opacity: 0.5 },
+  '100%': { opacity: 1 },
+};
+
 const styles = StyleSheet.create({
+  fadeIn: {
+    animationName: fadeIn,
+    animationDuration: '1s',
+    animationIterationCount: '3',
+  },
+  bounce: {
+    animationName: bounce,
+    animationDuration: '0.5s',
+    animationIterationCount: '3',
+  },
   Notifications: {
     border: "1px dashed rgb(250, 11, 11)",
     fontSize: "20px",
@@ -21,7 +42,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 9999,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff8f8",
 
     "@media (min-width: 600px)": {
       width: "auto",
@@ -63,8 +84,14 @@ const styles = StyleSheet.create({
     textAlign: "right",
     // marginRight: "20px",
     cursor: "pointer",
+    ":hover" : {
+      animationName: [bounce, fadeIn],
+      animationDuration: '0.5s',
+      animationIterationCount: 'infinite',
+    },
   },
 });
+
 
 export default class Notifications extends React.Component {
   constructor(props) {
@@ -142,6 +169,6 @@ Notifications.propTypes = {
 };
 
 Notifications.defaultProps = {
-  displayDrawer: true,
+  displayDrawer: false,
   listNotifications: [],
 };
