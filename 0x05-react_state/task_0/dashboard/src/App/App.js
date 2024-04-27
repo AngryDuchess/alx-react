@@ -1,128 +1,124 @@
-import React from "react";
-import Notifications from "../Notifications/Notifications";
-import Login from "../Login/Login";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import CourseList from "../CourseList/CourseList";
-import PropTypes from "prop-types";
-import { getLatestNotification } from "../utils/utils";
-import BodySection from "../BodySection/BodySection";
-import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
-import { StyleSheet, css } from "aphrodite";
-
-const styles = StyleSheet.create({
-  App: {
-    height: "100vh",
-    maxWidth: "100vw",
-    fontFamily: "Arial, Helvetica, sans-serif",
-  },
-  
-  Top: {
-    "@media (min-width: 600px)": {
-      display: "flex",
-      flexDirection: "row-reverse",
-      justifyContent: "space-between",
-    },
-  },
-  hr: {
-    height: "3px",
-    backgroundColor: "#e0354b",
-  },
-  "App-footer": {
-    textAlign: "center",
-  },
-});
+import React from 'react';
+import { StyleSheet, css } from 'aphrodite';
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import Notifications from '../Notifications/Notifications';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import CourseList from '../CourseList/CourseList';
+import PropTypes from 'prop-types';
+import { getLatestNotification } from '../utils/utils';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayDrawer: false,
-    };
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
-  }
-  listCourses = [
-    { id: 1, name: "ES6", credit: 60 },
-    { id: 2, name: "Webpack", credit: 20 },
-    { id: 3, name: "React", credit: 40 },
-  ];
-  listNotifications = [
-    { id: 1, type: "default", value: "New course available" },
-    { id: 2, type: "urgent", value: "New resume available" },
-    { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
-    { id: 4, type: "default", value: "Foo" },
-  ];
-  handleKeyPress(e) {
-    if (e.ctrlKey && e.key === "h") {
-      alert("Logging you out");
-      this.props.logOut();
-    }
-  }
-  
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-  
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
-  
-  componentDidMount() {
-    window.addEventListener("keydown", this.handleKeyPress);
-  }
+	constructor(props) {
+		super(props);
 
-  render() {
-    const { isLoggedIn } = this.props;
-    return (
-      <>
-        <div className={css(styles.App)}>
-          <div className={css(styles.Top)}>
-            <Notifications
-              displayDrawer={this.state.displayDrawer}
-              listNotifications={this.listNotifications}
-              handleDisplayDrawer={this.handleDisplayDrawer}
-              handleHideDrawer={this.handleHideDrawer}
-            />
-            <Header />
-          </div>
-          <hr className={css(styles.hr)} />
-          {isLoggedIn ? (
-            <BodySectionWithMarginBottom title="Course list">
-              <CourseList listCourses={this.listCourses} />
-            </BodySectionWithMarginBottom>
-          ) : (
-            <BodySectionWithMarginBottom title="Log in to continue">
-              <Login />
-            </BodySectionWithMarginBottom>
-          )}
-          <BodySection title="News from the School">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              et neque ex. Praesent eleifend ultrices leo, non elementum ligula
-              porta ac. Sed orci ex, venenatis at efficitur sit amet, gravida id
-              nulla. Class aptent taciti sociosqu ad litora torquent per conubia
-              nostra, per inceptos himenaeos.
-            </p>
-          </BodySection>
-          <hr className={css(styles.hr)} />
-          <Footer className={css(styles["App-footer"])} />
-        </div>
-      </>
-    );
-  }
+		this.state = { displayDrawer: false };
+
+		this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+		this.handleHideDrawer = this.handleHideDrawer.bind(this);
+	}
+
+	listCourses = [
+		{ id: 1, name: 'ES6', credit: 60 },
+		{ id: 2, name: 'Webpack', credit: 20 },
+		{ id: 3, name: 'React', credit: 40 },
+	];
+
+	listNotifications = [
+		{ id: 1, type: 'default', value: 'New course available' },
+		{ id: 2, type: 'urgent', value: 'New resume available' },
+		{ id: 3, type: 'default', html: getLatestNotification() },
+	];
+
+	componentDidMount() {
+		document.addEventListener('keydown', (e) => {
+			if (e.ctrlKey && e.key === 'h') {
+				alert('Logging you out');
+				this.props.logOut();
+			}
+		});
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('keydown', (e) => {
+			if (e.ctrlKey && e.key === 'h') {
+				alert('Logging you out');
+				this.props.logOut();
+			}
+		});
+	}
+
+	handleDisplayDrawer() {
+		this.setState({ displayDrawer: true });
+	}
+
+	handleHideDrawer() {
+		this.setState({ displayDrawer: false });
+	}
+
+	render() {
+		return (
+			<>
+				<div className={css(styles.container, styles.small)}>
+					<Header />
+					<Notifications
+						listNotifications={this.listNotifications}
+						displayDrawer={this.state.displayDrawer}
+						handleDisplayDrawer={this.handleDisplayDrawer}
+						handleHideDrawer={this.handleHideDrawer}
+					/>
+				</div>
+				<hr className={css(styles.hr)} />
+				{this.props.isLoggedIn ? (
+					<BodySectionWithMarginBottom>
+						<CourseList listCourses={this.listCourses} />
+					</BodySectionWithMarginBottom>
+				) : (
+					<BodySectionWithMarginBottom>
+						<Login />
+					</BodySectionWithMarginBottom>
+				)}
+				<BodySection title='News from the School'>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua.{' '}
+					</p>
+				</BodySection>
+				<hr className={css(styles.hr)} />
+				<Footer />
+			</>
+		);
+	}
 }
 
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => {
-    return;
-  },
+App.propTypes = {
+	isLoggedIn: PropTypes.bool,
+	logOut: PropTypes.func,
 };
 
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func,
+App.defaultProps = {
+	isLoggedIn: false,
+	logOut: () => {
+		return;
+	},
 };
+
+const styles = StyleSheet.create({
+	container: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
+	hr: {
+		borderTop: '2px solid red',
+	},
+	small: {
+		'@media (max-width: 900px)': {
+			display: 'grid',
+			justifyContent: 'center',
+		},
+	},
+});
+
 export default App;
