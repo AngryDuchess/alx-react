@@ -1,7 +1,7 @@
 const { Map } = require('immutable');
 
 function getImmutableObject(object) {
-  obj1 = Map(object);
+  const obj1 = Map(object);
   console.log(obj1);
 }
 
