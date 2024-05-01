@@ -6,7 +6,7 @@ export default function (grades) {
     .map((student) => ({
       score: student.score,
       firsName:
-        student.firsName.charAt(0).toUpperCase() + student.firsName.slice(1),
+        student.firsName.charAt(0).toUpperCase() + student.firstName.slice(1),
       lastName:
         student.lastName.charAt(0).toUpperCase() + student.lastName.slice(1),
     }));
