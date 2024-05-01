@@ -1,10 +1,9 @@
 import { List } from 'immutable';
 
 export function getListObject(array) {
-  const list1 = List(array);
-  return list1;
+	return List(array);
 }
 
 export function addElementToList(list, element) {
-  return list.push(element);
+	return list.push(element);
 }
