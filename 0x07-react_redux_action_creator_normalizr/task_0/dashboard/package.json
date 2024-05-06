@@ -35,6 +35,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.3",
     "aphrodite": "^2.4.0",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
