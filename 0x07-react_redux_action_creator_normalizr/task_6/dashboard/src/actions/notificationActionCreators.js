@@ -5,7 +5,12 @@ export const markAsAread = (index) => ({
   index
 })
 
+export const boundMarkAsread = (index) => dispatch(markAsAread(index));
+
+
 export const setNotificationFilter = (filter) => ({
   type: action.SET_TYPE_FILTER,
   filter
 })
+
+export const boundNotificationFilter = (filter) => dispatch(setNotificationFilter(filter));

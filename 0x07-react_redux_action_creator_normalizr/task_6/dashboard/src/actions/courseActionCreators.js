@@ -5,7 +5,11 @@ export const selectCourse = (index) => ({
   index
 });
 
+export const boundSelectCourse = (index) => dispatch(selectCourse(index));
+
 export const unSelectCourse =(index) => ({
     type: actions.UNSELECT_COURSE,
     index
 })
+
+export const boundUnselectCourse = (index) => dispatch(selectCourse(index));
